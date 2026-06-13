@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Script Iklan / Monetisasi -->
+    <script async src="https://pl28976673.profitablecpmratenetwork.com/bc/9f/be/bc9fbe80adf3bcb8ba2d1d062f4aae20.js"></script>
+    <style>
+        html,body{ margin:0; padding:0; background:#050505; font-family:Arial,sans-serif; overflow-x:hidden; color:#fff; }
+        body:before{ content:''; position:fixed; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at top,#222 0%,#050505 60%); z-index:-1; }
+        #playerWrap{ position:relative; width:100%; max-width:950px; margin:20px auto; padding:10px; box-sizing:border-box; }
+        video{ width:100%; background:#000; border-radius:20px; box-shadow:0 0 30px rgba(255,0,0,.15),0 0 80px rgba(0,0,0,.8); }
+        #playBtn{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:linear-gradient(135deg,#ff0000,#8b0000); color:#fff; border:none; padding:16px 34px; font-size:18px; font-weight:bold; border-radius:60px; cursor:pointer; z-index:10; transition:.3s; box-shadow:0 0 25px rgba(255,0,0,.5); display:block; }
+        #playBtn:hover{ transform:translate(-50%,-50%) scale(1.08); }
+        @media(max-width:768px){ #playerWrap{ padding:0; margin:0; } video{ border-radius:0; } #playBtn{ font-size:15px; padding:14px 28px; } }
+    </style>
+</head>
+<body>
+
+<div id="playerWrap">
+    <button id="playBtn">▶ PLAY VIDEO</button>
+    <!-- Atribut src dipindah langsung ke dalam tag video agar javascript bekerja lancar -->
+    <video id="videoPlayer" autoplay muted controls playsinline preload="metadata"></video>
+</div>
+
+<script>
+var btn = document.getElementById('playBtn');
+var video = document.getElementById('videoPlayer');
+var stopAfter = 15;
+var hasStopped = false;
+
+window.onload = function(){
+    var params = new URLSearchParams(window.location.search);
+    var file = params.get('video');
+    if(file){
+        // Memasukkan URL video langsung ke elemen videoPlayer
+        video.src = 'https://cdn2.videy.co/' + file + '.mp4';
+        video.load();
+    }
+    
+    video.play()
+    .then(function(){
+        btn.style.display='none';
+    })
+    .catch(function(){
+        btn.style.display='block';
+    });
+};
+
+btn.onclick = function(){
+    video.play();
+    btn.style.display='none';
+};
+
+video.addEventListener('timeupdate',function(){
+    if(video.currentTime >= stopAfter && !hasStopped){
+        hasStopped = true;
+        video.pause();
+        btn.style.display='block';
+    }
+});
+
+video.addEventListener('pause',function(){
+    if(!video.ended){
+        btn.style.display='block';
+    }
+});
+
+video.addEventListener('play',function(){
+    btn.style.display='none';
+});
+
+video.addEventListener('ended',function(){
+    btn.style.display='block';
+});
+</script>
+
+</body>
+</html>
