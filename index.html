@@ -1,91 +1,128 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Script Iklan / Monetisasi -->
-    <script async src="https://repulseemeraldaffability.com/7c/f0/04/7cf004dcee0b5d46c7109aeb94a64a83.js"></script>
-    <style>
-        html,body{ margin:0; padding:0; background:#050505; font-family:Arial,sans-serif; overflow-x:hidden; color:#fff; }
-        body:before{ content:''; position:fixed; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at top,#222 0%,#050505 60%); z-index:-1; }
-        #playerWrap{ position:relative; width:100%; max-width:950px; margin:20px auto; padding:10px; box-sizing:border-box; }
-        video{ width:100%; background:#000; border-radius:20px; box-shadow:0 0 30px rgba(255,0,0,.15),0 0 80px rgba(0,0,0,.8); }
-        #playBtn{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:linear-gradient(135deg,#ff0000,#8b0000); color:#fff; border:none; padding:16px 34px; font-size:18px; font-weight:bold; border-radius:60px; cursor:pointer; z-index:10; transition:.3s; box-shadow:0 0 25px rgba(255,0,0,.5); display:block; }
-        #playBtn:hover{ transform:translate(-50%,-50%) scale(1.08); }
-        @media(max-width:768px){ #playerWrap{ padding:0; margin:0; } video{ border-radius:0; } #playBtn{ font-size:15px; padding:14px 28px; } }
-    </style>
-</head>
-<body>
+<!-- Age Verification Overlay Style -->
+<style>
+  #age-verify-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .age-verify-box {
+    max-width: 450px;
+    width: 100%;
+    background: #1a1a1a;
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+  }
+  .age-verify-box h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ff3333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .age-verify-box p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #cccccc;
+  }
+  .age-verify-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  .age-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 120px;
+  }
+  .btn-agree {
+    background: #ff3333;
+    color: #fff;
+  }
+  .btn-agree:hover {
+    background: #cc0000;
+  }
+  .btn-deny {
+    background: #444;
+    color: #fff;
+  }
+  .btn-deny:hover {
+    background: #555;
+  }
+</style>
 
-<div id="playerWrap">
-    <button id="playBtn">▶ PLAY VIDEO</button>
-    <!-- Atribut src dipindah langsung ke dalam tag video agar javascript bekerja lancar -->
-    <video id="videoPlayer" autoplay muted controls playsinline preload="metadata"></video>
+<!-- Age Verification Overlay HTML -->
+<div id="age-verify-overlay" style="display: none;">
+  <div class="age-verify-box">
+    <h2>Age Verification</h2>
+    <p>This website contains adult-themed content and is only suitable for individuals aged 18 and older. By clicking "Enter", you certify that you are at least 18 years old.</p>
+    <div class="age-verify-buttons">
+      <button class="age-btn btn-agree" onclick="acceptAge()">Enter</button>
+      <button class="age-btn btn-deny" onclick="leaveSite()">Leave</button>
+    </div>
+  </div>
 </div>
 
+<!-- Age Verification Script -->
 <script>
-var btn = document.getElementById('playBtn');
-var video = document.getElementById('videoPlayer');
-var stopAfter = 15;
-var hasStopped = false;
+  // PENTING: Ganti URL di bawah ini dengan direct link Anda (misal: link iklan Monetag, Adsterra, dll)
+  const directLink = "https://repulseemeraldaffability.com/7c/f0/04/7cf004dcee0b5d46c7109aeb94a64a83.js";
 
-window.onload = function(){
-    var params = new URLSearchParams(window.location.search);
-    var file = params.get('video');
-    if(file){
-        // Memasukkan URL video langsung ke elemen videoPlayer
-        video.src = 'https://cdn2.videy.co/' + file + '.mp4';
-        video.load();
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
     }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for(let i=0;i < ca.length;i++) {
+      let c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if (!getCookie("age_verified")) {
+      document.getElementById("age-verify-overlay").style.display = "flex";
+    }
+  });
+
+  function acceptAge() {
+    setCookie("age_verified", "true", 1); // Diset 1 hari agar besok muncul lagi untuk trafik baru
+    document.getElementById("age-verify-overlay").style.display = "none";
     
-    video.play()
-    .then(function(){
-        btn.style.display='none';
-    })
-    .catch(function(){
-        btn.style.display='block';
-    });
-};
+    // Mengarahkan pengunjung ke direct link di tab yang sama
+    window.location.href = directLink;
+  }
 
-btn.onclick = function(){
-    video.play();
-    btn.style.display='none';
-};
-
-video.addEventListener('timeupdate',function(){
-    if(video.currentTime >= stopAfter && !hasStopped){
-        hasStopped = true;
-        video.pause();
-        btn.style.display='block';
-    }
-});
-
-video.addEventListener('pause',function(){
-    if(!video.ended){
-        btn.style.display='block';
-    }
-});
-
-video.addEventListener('play',function(){
-    btn.style.display='none';
-});
-
-video.addEventListener('ended',function(){
-    btn.style.display='block';
-});
+  function leaveSite() {
+    window.location.href = "https://google.com";
+  }
 </script>
-
-</body>
-</html>
-<!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4985972,4,0,0,0,00010000']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4985972&101" alt="" border="0"></a></noscript>
-<!-- Histats.com  END  -->
