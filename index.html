@@ -1,128 +1,161 @@
-<!-- Age Verification Overlay Style -->
-<style>
-  #age-verify-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  .age-verify-box {
-    max-width: 450px;
-    width: 100%;
-    background: #1a1a1a;
-    padding: 40px 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    border: 1px solid #333;
-  }
-  .age-verify-box h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #ff3333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .age-verify-box p {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: #cccccc;
-  }
-  .age-verify-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-  }
-  .age-btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    width: 120px;
-  }
-  .btn-agree {
-    background: #ff3333;
-    color: #fff;
-  }
-  .btn-agree:hover {
-    background: #cc0000;
-  }
-  .btn-deny {
-    background: #444;
-    color: #fff;
-  }
-  .btn-deny:hover {
-    background: #555;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Konten Dewasa</title>
 
-<!-- Age Verification Overlay HTML -->
-<div id="age-verify-overlay" style="display: none;">
-  <div class="age-verify-box">
-    <h2>Age Verification</h2>
-    <p>This website contains adult-themed content and is only suitable for individuals aged 18 and older. By clicking "Enter", you certify that you are at least 18 years old.</p>
-    <div class="age-verify-buttons">
-      <button class="age-btn btn-agree" onclick="acceptAge()">Enter</button>
-      <button class="age-btn btn-deny" onclick="leaveSite()">Leave</button>
+  <!-- Age Verification Overlay Style -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    #age-verify-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .age-verify-box {
+      max-width: 450px;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 40px 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border: 1px solid #333;
+    }
+    .age-verify-box h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ff3333;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .age-verify-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #cccccc;
+    }
+    .age-verify-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .age-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      width: 120px;
+    }
+    .btn-agree {
+      background: #ff3333;
+      color: #fff;
+    }
+    .btn-agree:hover {
+      background: #cc0000;
+    }
+    .btn-deny {
+      background: #444;
+      color: #fff;
+    }
+    .btn-deny:hover {
+      background: #555;
+    }
+    .main-content {
+      padding: 50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Age Verification Overlay HTML -->
+  <div id="age-verify-overlay" style="display: none;">
+    <div class="age-verify-box">
+      <h2>Age Verification</h2>
+      <p>This website contains adult-themed content and is only suitable for individuals aged 18 and older. By clicking "Enter", you certify that you are at least 18 years old.</p>
+      <div class="age-verify-buttons">
+        <button class="age-btn btn-agree" onclick="acceptAge()">Enter</button>
+        <button class="age-btn btn-deny" onclick="leaveSite()">Leave</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Age Verification Script -->
-<script>
-  // PENTING: Ganti URL di bawah ini dengan direct link Anda (misal: link iklan Monetag, Adsterra, dll)
-  const directLink = "https://repulseemeraldaffability.com/7c/f0/04/7cf004dcee0b5d46c7109aeb94a64a83.js";
+  <!-- Konten Utama Website Anda Setelah Overlay Terbuka -->
+  <div class="main-content">
+    <h1>Selamat Datang di Website Kami</h1>
+    <p>Ini adalah area konten utama yang berhasil diakses setelah verifikasi umur.</p>
+  </div>
 
-  function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-      let date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+  <!-- Age Verification Script -->
+  <script>
+    // URL iklan Anda (Menggunakan Smartlink/Direct Link, bukan file .js jika ingin redirect halaman)
+    const directLink = "https://repulseemeraldaffability.com/7c/f0/04/7cf004dcee0b5d46c7109aeb94a64a83.js";
+
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-  }
 
-  function getCookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for(let i=0;i < ca.length;i++) {
-      let c = ca[i];
-      while (c.charAt(0)==' ') c = c.substring(1,c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    function getCookie(name) {
+      let nameEQ = name + "=";
+      let ca = document.cookie.split(';');
+      for(let i=0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
     }
-    return null;
-  }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    if (!getCookie("age_verified")) {
-      document.getElementById("age-verify-overlay").style.display = "flex";
+    document.addEventListener("DOMContentLoaded", function() {
+      // Jika cookie belum ada, tampilkan overlay pengunci umur
+      if (!getCookie("age_verified")) {
+        document.getElementById("age-verify-overlay").style.display = "flex";
+      }
+    });
+
+    function acceptAge() {
+      // Set cookie 1 hari agar tidak terus-menerus muncul dalam sehari
+      setCookie("age_verified", "true", 1); 
+      
+      // Sembunyikan overlay agar konten utama kelihatan
+      document.getElementById("age-verify-overlay").style.display = "none";
+      
+      // Membuka link iklan di tab baru agar tidak merusak halaman utama GitHub Pages Anda
+      window.open(directLink, '_blank');
     }
-  });
 
-  function acceptAge() {
-    setCookie("age_verified", "true", 1); // Diset 1 hari agar besok muncul lagi untuk trafik baru
-    document.getElementById("age-verify-overlay").style.display = "none";
-    
-    // Mengarahkan pengunjung ke direct link di tab yang sama
-    window.location.href = directLink;
-  }
+    function leaveSite() {
+      // Jika menolak, buang pengunjung ke Google
+      window.location.href = "https://google.com";
+    }
+  </script>
 
-  function leaveSite() {
-    window.location.href = "https://google.com";
-  }
-</script>
+</body>
+</html>
